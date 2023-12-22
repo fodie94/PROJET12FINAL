@@ -11,9 +11,10 @@ import {
 // import "../styles/Home.css";
 import "../styles/PerformanceKind.css";
 import { PerformanceKindService } from "../fichierService/ficheService"; // Assurez-vous de fournir le bon chemin
+import { useUser } from "../userID/userID";
 
 function PerformanceKind() {
-  const userId = 12; // Remplacez par la logique pour obtenir l'ID de l'utilisateur si nécessaire
+  const { userId } = useUser();
   const performanceData = PerformanceKindService(userId);
 
   const data = performanceData || [];

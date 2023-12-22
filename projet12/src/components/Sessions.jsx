@@ -10,11 +10,12 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import { DataFormatterSessions } from "../formatage/formatageData";
+
 import { SessionsService } from "../fichierService/ficheService"; // Import du nouveau fichier
+import { useUser } from "../userID/userID";
 
 function Sessions() {
-  const userId = 12; // Remplacez par la logique pour obtenir l'ID de l'utilisateur si nécessaire
+  const { userId } = useUser();
   const userSessions = SessionsService(userId);
   console.log(userSessions);
   return (

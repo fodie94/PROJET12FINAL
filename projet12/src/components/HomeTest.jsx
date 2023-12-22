@@ -15,8 +15,9 @@ import PerformanceKind from "./PerformanceKind";
 import Score from "./Score";
 import Sessions from "./Sessions";
 import { useUserDataName } from "../fichierService/ficheService";
+import { useUser } from "../userID/userID";
 function HomeTest() {
-  const userId = 12;
+  const { userId } = useUser();
   const userFirstName = useUserDataName(userId);
   return (
     <>

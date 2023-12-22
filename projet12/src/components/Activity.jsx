@@ -13,16 +13,17 @@ import {
 import "../styles/Activity.css";
 import { useUserActivity } from "../fichierService/ficheService";
 import { DataFormatterActivity } from "../formatage/formatageData";
+import { useUser } from "../userID/userID";
 
 function Activity() {
-  const userId = 12;
+  const { userId } = useUser();
   const userActivity = useUserActivity(userId);
   const data = DataFormatterActivity.formatChartData(userActivity);
 
   console.log(data);
 
   return (
-    <ResponsiveContainer width="85%" height="45%">
+    <ResponsiveContainer width="100%" height="57%">
       <BarChart
         data={data}
         margin={{
@@ -31,9 +32,12 @@ function Activity() {
           left: 20,
           bottom: 5,
         }}
+        barCategoryGap={0} // Ajoutez cette ligne pour définir l'espace entre les barres
       >
         <CartesianGrid strokeDasharray="3" vertical={false} />
         <XAxis
+          scale="point"
+          padding={{ left: 10, right: 10 }}
           dataKey="name"
           tickLine={false}
           stroke="#9B9EAC"
@@ -46,6 +50,9 @@ function Activity() {
           orientation="right"
           tickLine={false}
           axisLine={false}
+          margin={{
+            right: 30,
+          }}
         />
         {/* Ajoutez axisLine={false} pour masquer les barres de graduation et gardez les chiffres à droite */}
         {/* Ajoutez tick={false} pour masquer les chiffres de l'axe "calories" */}

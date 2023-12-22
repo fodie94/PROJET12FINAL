@@ -4,6 +4,7 @@ import React from "react";
 // import "../styles/Home.css";
 import "../styles/Analyse.css";
 import { useNutritionData } from "../fichierService/ficheService";
+import { useUser } from "../userID/userID";
 import cal from "../assets/calories-icon.png";
 import carbs from "../assets/carbs-icon.png";
 import fat from "../assets/fat-icon.png";
@@ -11,7 +12,7 @@ import prot from "../assets/protein-icon.png";
 
 function Analyse() {
   // États pour stocker les informations de l'utilisateur
-  const userId = 12;
+  const { userId } = useUser();
 
   // Utilisez les hooks personnalisés pour récupérer les données
   const { caloriesCount, proteinCount, carbohydrateCount, lipidCount } =

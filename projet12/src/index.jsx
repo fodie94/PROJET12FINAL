@@ -1,11 +1,14 @@
 // App.js
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import HomePage from './pages/HomePage'
+import React from "react";
+import ReactDOM from "react-dom";
+import HomePage from "./pages/HomePage";
+import { UserProvider } from "../src/userID/userID";
 
-const rootElement = document.getElementById('root')
+const rootElement = document.getElementById("root");
 
-// Utilisez createRoot depuis "react-dom/client"
-const root = createRoot(rootElement)
-
-root.render(<HomePage />)
+ReactDOM.render(
+  <UserProvider>
+    <HomePage />
+  </UserProvider>,
+  rootElement
+);
