@@ -75,13 +75,6 @@ class DataFormatterSessions {
       sessionLength: session.sessionLength,
     }));
   }
-
-  //   static formatChartDataSessions(sessions) {
-  //     return sessions.map((session) => ({
-  //       day: DataFormatterSessions.formatDayLabel(session.day),
-  //       uv: session.sessionLength,
-  //     }));
-  //   }
 }
 
 // DataFormatterName.jsx
