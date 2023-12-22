@@ -1,0 +1,61 @@
+.cubePerformanceName {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #ffffff;
+  width: 147px;
+  height: 48px;
+  opacity: 0.5;
+  padding-top: 29px;
+  padding-left: 34px;
+}
+
+.custom-tooltip {
+  width: 39px;
+  height: 25px;
+  background: #ffffff;
+  font-family: Roboto;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.cubePerformance {
+  width: 258px;
+  position: relative;
+  overflow: hidden;
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: 0px 2px 4px 0px #00000005;
+  border-radius: 5px;
+}
+
+.cubePerformance::before,
+.cubePerformance::after {
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.cubePerformance::before {
+  width: 70%;
+  background: #ff0000;
+  left: 0;
+  z-index: -1;
+}
+
+.cubePerformance::after {
+  width: 30%;
+  background: #ff0000;
+  opacity: 0.5;
+  right: 0;
+  z-index: -1;
+}

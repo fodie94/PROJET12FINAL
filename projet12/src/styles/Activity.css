@@ -1,0 +1,62 @@
+/* .AnalyseLeftTop {
+  width: 100%;
+  height: 325px;
+  gap: 64px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #fbfbfb;
+  box-shadow: 0px 2px 4px 0px #00000005;
+} */
+
+.AnalyseLeftTopText {
+  display: flex;
+  justify-content: space-between;
+  width: 88%;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.AnalyseLeftTopText p {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #20253a;
+}
+
+.AnalyseLeftTopTextPoidCal {
+  display: flex;
+  gap: 15px;
+  color: #74798c;
+}
+
+.AnalyseLeftTopTextPoid,
+.AnalyseLeftTopTextCal {
+  display: flex;
+  gap: 5px;
+}
+
+.custom-tooltip-Activity {
+  width: 39px;
+  height: 63px;
+  background: red;
+  font-family: Roboto;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

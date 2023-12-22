@@ -1,0 +1,14 @@
+.cubeKind {
+  width: 258px;
+  /* border: 1px solid green; */
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  background: #282d30;
+  box-shadow: 0px 2px 4px 0px #00000005;
+  color: #ffffff;
+  border-radius: 5px;
+}

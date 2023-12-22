@@ -1,0 +1,123 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+.Home {
+  display: flex;
+}
+
+.HomeLeft {
+  width: 117px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 1000px;
+  background-color: black;
+  color: white;
+  align-items: center;
+}
+
+/* Ajoutez ceci à votre fichier Home.css ou à l'endroit où vous définissez les styles */
+.Copyright {
+  writing-mode: vertical-rl;
+  text-orientation: unset;
+  white-space: nowrap;
+  rotate: 180deg;
+}
+
+.HomeRight {
+  /* border: 2px solid black; */
+  margin: 68px 90px 86px 107px;
+  height: 780px;
+  width: 1126px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Profil {
+  gap: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ProfilNameText {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.ProfilName {
+  display: flex;
+  gap: 10px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.ProfilName p {
+  color: red;
+  font-family: Roboto;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.Analyse {
+  /* border: 1px solid black; */
+  display: flex;
+  gap: 33px;
+}
+
+.AnalyseLeft {
+  width: 835px;
+  height: 100%;
+  gap: 28px;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.AnalyseLeftTop {
+  width: 100%;
+  height: 325px;
+  gap: 64px;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #fbfbfb;
+  box-shadow: 0px 2px 4px 0px #00000005;
+}
+
+.AnalyseLeftBottom {
+  display: flex;
+  width: 100%;
+  height: 263px;
+  /* border: 1px solid black; */
+  justify-content: space-between;
+}
+
+.AnalyseRight {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  flex: 1;
+  justify-content: space-between;
+}

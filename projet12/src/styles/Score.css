@@ -1,0 +1,47 @@
+.cubeScore {
+  background-color: #fbfbfb;
+
+  width: 258px;
+  /* border: 1px solid green; */
+  box-shadow: 0px 2px 4px 0px #00000005;
+  border-radius: 5px;
+}
+.ScoreName {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  width: 39px;
+  height: 24px;
+  padding: 24px 0 0 30px;
+}
+
+.Score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+text {
+  width: 95px;
+  height: 56px;
+}
+
+.scoreText {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.cercle {
+  display: flex;
+  background-color: black;
+}
+
+g .recharts-layer .recharts-pie-sector {
+}

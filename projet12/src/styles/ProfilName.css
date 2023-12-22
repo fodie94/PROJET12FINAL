@@ -1,0 +1,37 @@
+.ProfilName h1 {
+  font-family: Roboto;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.ProfilNameText {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.ProfilName {
+  display: flex;
+  gap: 10px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.ProfilName p {
+  color: red;
+  font-family: Roboto;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
