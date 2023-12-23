@@ -5,31 +5,33 @@ import USER_MAIN_DATA from "../data/USER_MAIN_DATA.json";
 import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 
 class DataFormatterKind {
-  // static formatPerformanceData(JSON, useServerData) {
-  //   Vérifier si JSON est défini et a les propriétés attendues
-  //   const performanceDataLocal = USER_PERFORMANCE[0].data;
-  //   const performanceNamesLocal = USER_PERFORMANCE[0].kind;
-  //   console.log(performanceDataLocal);
-  //   console.log(performanceNamesLocal);
-  //   const performanceData = JSON.data.data || [];
-  //   const performanceNames = JSON.data.kind || [];
-
-  //   const formattedData = performanceData.map((session) => ({
-  //     value: session.value,
-  //     kind: performanceNames[session.kind],
-  //   }));
-  //   return formattedData;
-  // }
-  static formatPerformanceData() {
+  static formatPerformanceData(JSON, useServerData = true) {
+    // Vérifier si JSON est défini et a les propriétés attendues
     const performanceDataLocal = USER_PERFORMANCE[0].data;
     const performanceNamesLocal = USER_PERFORMANCE[0].kind;
     console.log(performanceDataLocal);
     console.log(performanceNamesLocal);
-    const formattedData = performanceDataLocal.map((session) => ({
-      value: session.value,
-      kind: performanceNamesLocal[session.kind],
-    }));
-    return formattedData;
+
+    if (useServerData) {
+      console.log("Utilisation API");
+      const performanceData = JSON.data.data || [];
+      const performanceNames = JSON.data.kind || [];
+
+      const formattedData = performanceData.map((session) => ({
+        value: session.value,
+        kind: performanceNames[session.kind],
+      }));
+
+      return formattedData;
+    } else {
+      console.log("Utilisation LOCAL");
+      const formattedData = performanceDataLocal.map((session) => ({
+        value: session.value,
+        kind: performanceNamesLocal[session.kind],
+      }));
+
+      return formattedData;
+    }
   }
 }
 
@@ -98,21 +100,41 @@ class DataFormatterActivity {
 }
 
 class DataFormatterScore {
-  static formatScore(userData) {
-    const todayScore = userData.data.todayScore || userData.data.score;
-    console.log(todayScore);
-    // const remainingScore = 1 - (todayScore || 0);
+  static formatScore(userData, useServerData = true) {
+    // Si on utilise les données du serveur
+    if (useServerData) {
+      console.log("Utilisation API");
+      const todayScore = userData.data.todayScore || userData.data.score;
 
-    return [
-      {
-        name: "score",
-        value: todayScore || 0,
-      },
-      {
-        name: "restant",
-        // value: remainingScore,
-      },
-    ];
+      return [
+        {
+          name: "score",
+          value: todayScore || 0,
+        },
+        {
+          name: "restant",
+          // value: remainingScore,
+        },
+      ];
+    } else {
+      console.log("Utilisation LOCAL");
+      // Utilisation des données locales
+      const data = USER_MAIN_DATA[0];
+      console.log(data);
+      const score = data.todayScore;
+      console.log(score);
+
+      return [
+        {
+          name: "score",
+          value: score || 0,
+        },
+        {
+          name: "restant",
+          // value: remainingScore,
+        },
+      ];
+    }
   }
 }
 
@@ -136,67 +158,77 @@ class DataFormatterSessions {
     return day;
   }
 
-  // static formatSessions(dataJSON) {
-  //   return dataJSON.data.sessions.map((session) => ({
-  //     day: DataFormatterSessions.formatDayLabel(session.day),
-  //     sessionLength: session.sessionLength,
-  //   }));
-  // }
-
-  //  Forme LOCAL//
-  static formatSessions() {
-    const UserSessions = USER_AVERAGE_SESSIONS[0];
-    console.log(UserSessions);
-    return UserSessions.sessions.map((session) => ({
-      day: DataFormatterSessions.formatDayLabel(session.day),
-      sessionLength: session.sessionLength,
-    }));
+  static formatSessions(dataJSON, useServerData = true) {
+    // Si on utilise les données du serveur
+    if (useServerData) {
+      console.log("Utilisation API");
+      return dataJSON.data.sessions.map((session) => ({
+        day: DataFormatterSessions.formatDayLabel(session.day),
+        sessionLength: session.sessionLength,
+      }));
+    } else {
+      console.log("Utilisation LOCAL");
+      // Utilisation des données locales
+      const UserSessions = USER_AVERAGE_SESSIONS[0];
+      console.log(UserSessions);
+      return UserSessions.sessions.map((session) => ({
+        day: DataFormatterSessions.formatDayLabel(session.day),
+        sessionLength: session.sessionLength,
+      }));
+    }
   }
 }
 
 // DataFormatterName.jsx
 class DataFormatterName {
-  // static formatUserData(userData) {
-  //   const { firstName } = userData.data.userInfos;
-  //   return firstName;
-  // }
-
-  //  Forme LOCAL//
-  static formatUserData() {
-    const Name = USER_MAIN_DATA[0];
-    console.log(Name);
-    const firstName = Name.userInfos.firstName;
-    console.log(firstName);
-    return firstName;
+  static formatUserData(userData, useServerData = true) {
+    // Si on utilise les données du serveur
+    if (useServerData) {
+      console.log("Utilisation API");
+      const { firstName } = userData.data.userInfos;
+      return firstName;
+    } else {
+      console.log("Utilisation LOCAL");
+      // Utilisation des données locales
+      const Name = USER_MAIN_DATA[0];
+      console.log(Name);
+      const firstName = Name.userInfos.firstName;
+      console.log(firstName);
+      return firstName;
+    }
   }
 }
 
 // DataFormatterNutrition.jsx
 class DataFormatterNutrition {
-  // static formatNutritionData(userData) {
-  //   const { calorieCount, proteinCount, carbohydrateCount, lipidCount } =
-  //     userData.data.keyData;
+  static formatNutritionData(userData, useServerData = false) {
+    // Si on utilise les données du serveur
+    if (useServerData) {
+      console.log("Utilisation API");
+      const { calorieCount, proteinCount, carbohydrateCount, lipidCount } =
+        userData.data.keyData;
 
-  //   return {
-  //     caloriesCount: `${calorieCount} KCal`,
-  //     proteinCount: `${proteinCount} g`,
-  //     carbohydrateCount: `${carbohydrateCount} g`,
-  //     lipidCount: `${lipidCount} g`,
-  //   };
-  // }
+      return {
+        caloriesCount: `${calorieCount} KCal`,
+        proteinCount: `${proteinCount} g`,
+        carbohydrateCount: `${carbohydrateCount} g`,
+        lipidCount: `${lipidCount} g`,
+      };
+    } else {
+      console.log("Utilisation LOCAL");
+      // Utilisation des données locales
+      const data = USER_MAIN_DATA[0];
+      console.log(data);
+      const Nutrition = data.keyData;
+      console.log(Nutrition);
 
-  static formatNutritionData() {
-    const data = USER_MAIN_DATA[0];
-    console.log(data);
-    const Nutrition = data.keyData;
-    console.log(Nutrition);
-
-    return {
-      caloriesCount: `${Nutrition.calorieCount} KCal`,
-      proteinCount: `${Nutrition.proteinCount} g`,
-      carbohydrateCount: `${Nutrition.carbohydrateCount} g`,
-      lipidCount: `${Nutrition.lipidCount} g`,
-    };
+      return {
+        caloriesCount: `${Nutrition.calorieCount} KCal`,
+        proteinCount: `${Nutrition.proteinCount} g`,
+        carbohydrateCount: `${Nutrition.carbohydrateCount} g`,
+        lipidCount: `${Nutrition.lipidCount} g`,
+      };
+    }
   }
 }
 
