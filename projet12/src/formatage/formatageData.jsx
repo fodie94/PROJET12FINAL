@@ -33,36 +33,62 @@ class DataFormatterKind {
   }
 }
 
-class DataFormatterActivity {
-  static formatActivity(dataJSON, useServerData) {
-    // Vérifier si dataJSON est un objet avec une propriété 'data' et un tableau de sessions valide
-    if (
-      !dataJSON || // Vérifie si dataJSON est falsifié
-      (useServerData && !dataJSON.data) || // Vérifie si on utilise les données du serveur et que la propriété 'data' est manquante
-      (useServerData && !Array.isArray(dataJSON.data.sessions)) // Vérifie si on utilise les données du serveur et que 'sessions' n'est pas un tableau
-    ) {
-      console.error("Données invalides :", dataJSON);
-      return [];
-    }
+// class DataFormatterActivity {
+//   static formatActivity(dataJSON, useServerData) {
+//     // Vérifier si dataJSON est un objet avec une propriété 'data' et un tableau de sessions valide
+//     if (
+//       !dataJSON || // Vérifie si dataJSON est falsifié
+//       (useServerData && !dataJSON.data) || // Vérifie si on utilise les données du serveur et que la propriété 'data' est manquante
+//       (useServerData && !Array.isArray(dataJSON.data.sessions)) // Vérifie si on utilise les données du serveur et que 'sessions' n'est pas un tableau
+//     ) {
+//       console.error("Données invalides :", dataJSON);
+//       return [];
+//     }
 
-    if (useServerData) {
-      // Si on utilise les données du serveur, mapper le tableau de sessions
-      return dataJSON.data.sessions.map((session) => ({
-        kilogram: session.kilogram,
-        calories: session.calories,
-      }));
-    } else {
-      // Si on utilise des données locales, extraire sessionsArray et le mapper
-      const sessionsArray = dataJSON.length === 1 ? dataJSON[0].sessions : [];
-      return sessionsArray.map((session) => ({
-        kilogram: session.kilogram,
-        calories: session.calories,
-      }));
-    }
+//     if (useServerData) {
+//       // Si on utilise les données du serveur, mapper le tableau de sessions
+//       return dataJSON.data.sessions.map((session) => ({
+//         kilogram: session.kilogram,
+//         calories: session.calories,
+//       }));
+//     } else {
+//       // Si on utilise des données locales, extraire sessionsArray et le mapper
+//       const sessionsArray = dataJSON.length === 1 ? dataJSON[0].sessions : [];
+//       return sessionsArray.map((session) => ({
+//         kilogram: session.kilogram,
+//         calories: session.calories,
+//       }));
+//     }
+//   }
+
+//   static formatChartData(sessions) {
+//     // Mapper les sessions pour obtenir un format adapté aux données du graphique
+//     return sessions.map((session, index) => ({
+//       name: index + 1,
+//       kilogram: session.kilogram,
+//       calories: session.calories,
+//     }));
+//   }
+// }
+
+class DataFormatterActivity {
+  // static formatActivity(dataJSON) {
+  //   return dataJSON.data.sessions.map((session) => ({
+  //     kilogram: session.kilogram,
+  //     calories: session.calories,
+  //   }));
+  // }
+
+  static formatActivity() {
+    const data = USER_ACTIVITY[0];
+    console.log(data);
+    return data.sessions.map((session) => ({
+      kilogram: session.kilogram,
+      calories: session.calories,
+    }));
   }
 
   static formatChartData(sessions) {
-    // Mapper les sessions pour obtenir un format adapté aux données du graphique
     return sessions.map((session, index) => ({
       name: index + 1,
       kilogram: session.kilogram,

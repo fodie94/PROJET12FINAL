@@ -14,6 +14,50 @@ import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 
 // ficheService.jsx
 
+// const useUserActivity = (userId) => {
+//   const [userActivity, setUserActivity] = useState([]);
+
+//   useEffect(() => {
+//     const fetchUserData = async () => {
+//       try {
+//         let userDataActivity;
+
+//         // Utiliser true si userId est fourni, sinon false
+//         const useServerData = userId ? true : false;
+
+//         // Utiliser false pour toujours utiliser les données locales
+//         //const useServerData = false;
+
+//         if (useServerData) {
+//           // Si userId est fourni, récupérez les données du serveur
+//           const responseActivity = await fetch(
+//             `http://localhost:3000/user/${userId}/activity`
+//           );
+//           userDataActivity = await responseActivity.json();
+//         } else {
+//           // Sinon, utilisez le JSON local
+//           userDataActivity = USER_ACTIVITY.filter(
+//             (data) => data.userId === userId
+//           );
+//         }
+
+//         const ActivityData = DataFormatterActivity.formatActivity(
+//           userDataActivity,
+//           useServerData
+//         );
+//         //  console.log(ActivityData);
+//         setUserActivity(ActivityData);
+//       } catch (error) {
+//         console.error("Erreur lors de la récupération des données :", error);
+//       }
+//     };
+
+//     fetchUserData();
+//   }, [userId]); // userId est de nouveau une dépendance
+
+//   return userActivity;
+// };
+
 const useUserActivity = (userId) => {
   const [userActivity, setUserActivity] = useState([]);
 
@@ -22,30 +66,15 @@ const useUserActivity = (userId) => {
       try {
         let userDataActivity;
 
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
-
-        // Utiliser false pour toujours utiliser les données locales
-        //const useServerData = false;
-
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const responseActivity = await fetch(
-            `http://localhost:3000/user/${userId}/activity`
-          );
-          userDataActivity = await responseActivity.json();
-        } else {
-          // Sinon, utilisez le JSON local
-          userDataActivity = USER_ACTIVITY.filter(
-            (data) => data.userId === userId
-          );
-        }
-
-        const ActivityData = DataFormatterActivity.formatActivity(
-          userDataActivity,
-          useServerData
+        // Si userId est fourni, récupérez les données du serveur
+        const responseActivity = await fetch(
+          `http://localhost:3000/user/${userId}/activity`
         );
-        //  console.log(ActivityData);
+        userDataActivity = await responseActivity.json();
+
+        console.log(userDataActivity);
+        const ActivityData =
+          DataFormatterActivity.formatActivity(userDataActivity);
         setUserActivity(ActivityData);
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
