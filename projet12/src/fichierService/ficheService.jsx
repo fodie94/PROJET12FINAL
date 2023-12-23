@@ -7,56 +7,8 @@ import {
   DataFormatterName,
   DataFormatterNutrition,
 } from "../formatage/formatageData";
-import USER_ACTIVITY from "../data/USER_ACTIVITY.json";
-import USER_AVERAGE_SESSIONS from "../data/USER_AVERAGE_SESSIONS.json";
-import USER_MAIN_DATA from "../data/USER_MAIN_DATA.json";
-import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 
 // ficheService.jsx
-
-// const useUserActivity = (userId) => {
-//   const [userActivity, setUserActivity] = useState([]);
-
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         let userDataActivity;
-
-//         // Utiliser true si userId est fourni, sinon false
-//         const useServerData = userId ? true : false;
-
-//         // Utiliser false pour toujours utiliser les données locales
-//         //const useServerData = false;
-
-//         if (useServerData) {
-//           // Si userId est fourni, récupérez les données du serveur
-//           const responseActivity = await fetch(
-//             `http://localhost:3000/user/${userId}/activity`
-//           );
-//           userDataActivity = await responseActivity.json();
-//         } else {
-//           // Sinon, utilisez le JSON local
-//           userDataActivity = USER_ACTIVITY.filter(
-//             (data) => data.userId === userId
-//           );
-//         }
-
-//         const ActivityData = DataFormatterActivity.formatActivity(
-//           userDataActivity,
-//           useServerData
-//         );
-//         //  console.log(ActivityData);
-//         setUserActivity(ActivityData);
-//       } catch (error) {
-//         console.error("Erreur lors de la récupération des données :", error);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, [userId]); // userId est de nouveau une dépendance
-
-//   return userActivity;
-// };
 
 const useUserActivity = (userId) => {
   const [userActivity, setUserActivity] = useState([]);
@@ -66,7 +18,6 @@ const useUserActivity = (userId) => {
       try {
         let userDataActivity;
 
-        // Si userId est fourni, récupérez les données du serveur
         const responseActivity = await fetch(
           `http://localhost:3000/user/${userId}/activity`
         );
@@ -87,55 +38,6 @@ const useUserActivity = (userId) => {
   return userActivity;
 };
 
-// PerformanceKindService
-// const PerformanceKindService = (userId) => {
-//   const [performanceData, setPerformanceData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         let userDataPerformance;
-
-//         // Utiliser true si userId est fourni, sinon false
-//         const useServerData = userId ? true : false;
-
-//         // Utiliser false pour toujours utiliser les données locales
-//         //const useServerData = false;
-
-//         if (useServerData) {
-//           // Si userId est fourni, récupérez les données du serveur
-//           const responsePerformance = await fetch(
-//             `http://localhost:3000/user/${userId}/performance`
-//           );
-//           userDataPerformance = await responsePerformance.json();
-//         } else {
-//           // Sinon, utilisez le JSON local
-//           userDataPerformance = USER_PERFORMANCE.filter(
-//             (data) => data.userId === userId
-//           );
-//         }
-
-//         // Ajoutez des logs pour vérifier les données récupérées
-//         console.log("Raw Performance Data:", userDataPerformance);
-
-//         const formattedData =
-//           DataFormatterKind.formatPerformanceData(userDataPerformance);
-
-//         // Ajoutez des logs pour vérifier les données formatées
-//         console.log("Formatted Performance Data:", formattedData);
-
-//         setPerformanceData(formattedData);
-//       } catch (error) {
-//         console.error("Erreur lors de la récupération des données :", error);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, [userId]);
-
-//   return performanceData;
-// };
-
 const PerformanceKindService = (userId) => {
   const [performanceData, setPerformanceData] = useState(null);
 
@@ -144,32 +46,16 @@ const PerformanceKindService = (userId) => {
       try {
         let userDataPerformance;
 
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
-
-        // Utiliser false pour toujours utiliser les données locales
-        //  const useServerData = false;
-
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const responsePerformance = await fetch(
-            `http://localhost:3000/user/${userId}/performance`
-          );
-          userDataPerformance = await responsePerformance.json();
-        } else {
-          // Sinon, utilisez le JSON local
-          userDataPerformance = USER_PERFORMANCE.filter(
-            (data) => data.userId === userId
-          );
-        }
+        const responsePerformance = await fetch(
+          `http://localhost:3000/user/${userId}/performance`
+        );
+        userDataPerformance = await responsePerformance.json();
 
         // Ajoutez des logs pour vérifier les données récupérées
         console.log("Raw Performance Data:", userDataPerformance);
 
-        const formattedData = DataFormatterKind.formatPerformanceData(
-          userDataPerformance,
-          useServerData
-        );
+        const formattedData =
+          DataFormatterKind.formatPerformanceData(userDataPerformance);
 
         // Ajoutez des logs pour vérifier les données formatées
         console.log("Formatted Performance Data:", formattedData);
@@ -195,22 +81,9 @@ const useScoreData = (userId) => {
       try {
         let userDataScore;
 
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
-
-        // Utiliser false pour toujours utiliser les données locales
-        // const useServerData = false;
-
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const response = await fetch(`http://localhost:3000/user/${userId}`);
-          userDataScore = await response.json();
-        } else {
-          // Sinon, utilisez le JSON local
-          userDataScore = USER_MAIN_DATA.filter(
-            (data) => data.userId === userId
-          );
-        }
+        // Si userId est fourni, récupérez les données du serveur
+        const response = await fetch(`http://localhost:3000/user/${userId}`);
+        userDataScore = await response.json();
 
         const formattedScoreData =
           DataFormatterScore.formatScore(userDataScore);
@@ -222,8 +95,7 @@ const useScoreData = (userId) => {
 
     fetchData();
   }, [userId]);
-  // let infos = USER_MAIN_DATA;
-  // console.log(infos);
+
   return scoreData;
 };
 
@@ -236,22 +108,12 @@ const SessionsService = (userId) => {
       try {
         let userDataSessions;
 
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
-
-        // Utiliser false pour toujours utiliser les données locales
-        //const useServerData = false;
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const responseSessions = await fetch(
-            `http://localhost:3000/user/${userId}/average-sessions`
-          );
-          userDataSessions = await responseSessions.json();
-          console.log(userDataSessions);
-        } else {
-          // Sinon, utilisez le JSON local
-          userDataSessions = USER_AVERAGE_SESSIONS;
-        }
+        // Si userId est fourni, récupérez les données du serveur
+        const responseSessions = await fetch(
+          `http://localhost:3000/user/${userId}/average-sessions`
+        );
+        userDataSessions = await responseSessions.json();
+        console.log(userDataSessions);
 
         const sessionsData =
           DataFormatterSessions.formatSessions(userDataSessions);
@@ -264,8 +126,7 @@ const SessionsService = (userId) => {
 
     fetchUserData();
   }, [userId]);
-  // let infos = USER_AVERAGE_SESSIONS;
-  // console.log(infos);
+
   return userSessions;
 };
 
@@ -277,19 +138,10 @@ const useUserDataName = (userId) => {
     const fetchUserData = async () => {
       try {
         let userData;
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
 
-        // Utiliser false pour toujours utiliser les données locales
-        //const useServerData = false;
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const response = await fetch(`http://localhost:3000/user/${userId}`);
-          userData = await response.json();
-        } else {
-          // Sinon, utilisez le JSON local
-          userData = USER_MAIN_DATA;
-        }
+        // Si userId est fourni, récupérez les données du serveur
+        const response = await fetch(`http://localhost:3000/user/${userId}`);
+        userData = await response.json();
 
         const formattedFirstName = DataFormatterName.formatUserData(userData);
 
@@ -303,8 +155,7 @@ const useUserDataName = (userId) => {
 
     fetchUserData();
   }, [userId]);
-  // let infos = USER_MAIN_DATA;
-  // console.log(infos);
+
   return userFirstName;
 };
 
@@ -321,29 +172,14 @@ const useNutritionData = (userId) => {
     const fetchUserData = async () => {
       try {
         let userDataNutrition;
-        // Utiliser true si userId est fourni, sinon false
-        const useServerData = userId ? true : false;
 
-        // Utiliser false pour toujours utiliser les données locales
-        //const useServerData = false;
-        if (useServerData) {
-          // Si userId est fourni, récupérez les données du serveur
-          const response = await fetch(`http://localhost:3000/user/${userId}`);
-          userDataNutrition = await response.json();
-        } else {
-          // Sinon, utilisez le JSON local
-          userDataNutrition = USER_MAIN_DATA;
-        }
-
+        // Si userId est fourni, récupérez les données du serveur
+        const response = await fetch(`http://localhost:3000/user/${userId}`);
+        userDataNutrition = await response.json();
         const formattedNutritionData =
           DataFormatterNutrition.formatNutritionData(userDataNutrition);
 
         setNutritionData(formattedNutritionData);
-
-        //     console.log(
-        //       "Données nutritionnelles de l'utilisateur :",
-        //       userDataNutrition
-        //    );
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
@@ -351,8 +187,7 @@ const useNutritionData = (userId) => {
 
     fetchUserData();
   }, [userId]);
-  //  let infos = USER_MAIN_DATA;
-  // console.log(infos);
+
   return nutritionData;
 };
 
