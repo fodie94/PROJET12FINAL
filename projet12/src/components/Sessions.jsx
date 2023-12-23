@@ -17,7 +17,7 @@ import { useUser } from "../userID/userID";
 function Sessions() {
   const { userId } = useUser();
   const userSessions = SessionsService(userId);
-  console.log(userSessions);
+  //  console.log(userSessions);
   return (
     <ResponsiveContainer
       id="performance-container"
