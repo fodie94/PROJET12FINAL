@@ -74,23 +74,28 @@ class DataFormatterKind {
 // }
 
 class DataFormatterActivity {
-  // static formatActivity(dataJSON) {
-  //   return dataJSON.data.sessions.map((session) => ({
-  //     kilogram: session.kilogram,
-  //     calories: session.calories,
-  //   }));
-  // }
-
-  static formatActivity() {
-    const data = USER_ACTIVITY[0];
-    console.log(data);
-    return data.sessions.map((session) => ({
-      kilogram: session.kilogram,
-      calories: session.calories,
-    }));
+  static formatActivity(dataJSON, useServerData = true) {
+    // Si on utilise les données du serveur
+    if (useServerData) {
+      console.log("Utilisation API");
+      return dataJSON.data.sessions.map((session) => ({
+        kilogram: session.kilogram,
+        calories: session.calories,
+      }));
+    } else {
+      console.log("Utilisation LOCAL");
+      // Utilisation des données locales
+      const data = USER_ACTIVITY[0];
+      console.log(data);
+      return data.sessions.map((session) => ({
+        kilogram: session.kilogram,
+        calories: session.calories,
+      }));
+    }
   }
 
   static formatChartData(sessions) {
+    // Mapper les sessions pour obtenir un format adapté aux données du graphique
     return sessions.map((session, index) => ({
       name: index + 1,
       kilogram: session.kilogram,
@@ -100,7 +105,7 @@ class DataFormatterActivity {
 }
 
 class DataFormatterScore {
-  static formatScore(userData, useServerData = true) {
+  static formatScore(userData, useServerData) {
     // Si on utilise les données du serveur
     if (useServerData) {
       console.log("Utilisation API");
