@@ -5,7 +5,9 @@ import USER_MAIN_DATA from "../data/USER_MAIN_DATA.json";
 import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 // Définissez une variable globale pour déterminer l'utilisation des données du serveur ou locales
-let useServerData = true; // Mettez la valeur par défaut ici
+//let useServerData = true; // Mettez la valeur par défaut ici
+let useServerData = false;
+
 let userDataIndex = userId === 12 ? 0 : userId === 18 ? 1 : 0; // Choisissez l'index en fonction de userId
 console.log(userDataIndex);
 
@@ -103,9 +105,16 @@ class DataFormatterScore {
       console.log("Utilisation LOCAL");
       const data = scoreDataLocal || {};
       console.log(data);
-      const score = data.todayScore;
-      console.log(score);
+      let score;
 
+      // Ajoutez la condition ici
+      if (userId === 12) {
+        score = data.todayScore;
+      } else if (userId === 18) {
+        score = data.score;
+      }
+
+      console.log(score);
       return [
         {
           name: "score",

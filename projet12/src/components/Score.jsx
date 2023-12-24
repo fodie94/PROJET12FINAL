@@ -90,6 +90,7 @@ function Score() {
         y="48%"
         textAnchor="middle"
         background="#00FF00" // Ajout du fond vert
+        style={{ fontFamily: "Roboto, sans-serif" }}
       >
         {scoreData.length > 0 && `${scoreData[0].value * 100}%`}
       </text>
@@ -101,6 +102,7 @@ function Score() {
         y="60%"
         textAnchor="middle"
         background="#00FF00" // Ajout du fond vert
+        style={{ fontFamily: "Roboto, sans-serif" }}
       >
         de votre
       </text>
@@ -112,6 +114,7 @@ function Score() {
         y="70%"
         textAnchor="middle"
         background="#00FF00" // Ajout du fond vert
+        style={{ fontFamily: "Roboto, sans-serif" }}
       >
         objectif
       </text>

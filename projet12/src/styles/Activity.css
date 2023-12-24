@@ -10,6 +10,16 @@
   background: #fbfbfb;
   box-shadow: 0px 2px 4px 0px #00000005;
 } */
+/* Vos styles CSS avec la famille de police Roboto */
+.AnalyseLeftTopText,
+.AnalyseLeftTopText p,
+.AnalyseLeftTopTextPoidCal,
+.AnalyseLeftTopTextPoid,
+.AnalyseLeftTopTextCal,
+.custom-tooltip-Activity {
+  font-family: "Roboto", sans-serif;
+  /* Vos autres propriétés CSS ici */
+}
 
 .AnalyseLeftTopText {
   display: flex;
