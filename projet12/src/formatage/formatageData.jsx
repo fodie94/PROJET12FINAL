@@ -6,16 +6,22 @@ import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 
 // Définissez une variable globale pour déterminer l'utilisation des données du serveur ou locales
 let useServerData = false; // Mettez la valeur par défaut ici
+let userDataIndex = 0; // Index par défaut userID 12 = 0 / userID 18 = 1
 
 // Exportez une fonction pour mettre à jour la variable useServerData
 function setUseServerData(value) {
   useServerData = value;
 }
 
+// Exportez une fonction pour mettre à jour l'index de performanceData
+function setDataIndex(index) {
+  userDataIndex = index;
+}
+
 class DataFormatterKind {
-  static formatPerformanceData(JSON) {
-    const performanceDataLocal = USER_PERFORMANCE[0].data;
-    const performanceNamesLocal = USER_PERFORMANCE[0].kind;
+  static formatPerformanceData(JSON, dataIndex = userDataIndex) {
+    const performanceDataLocal = USER_PERFORMANCE[dataIndex].data;
+    const performanceNamesLocal = USER_PERFORMANCE[dataIndex].kind;
     console.log(performanceDataLocal);
     console.log(performanceNamesLocal);
 
@@ -43,7 +49,10 @@ class DataFormatterKind {
 }
 
 class DataFormatterActivity {
-  static formatActivity(dataJSON) {
+  static formatActivity(dataJSON, dataIndex = userDataIndex) {
+    const activityDataLocal = USER_ACTIVITY[dataIndex];
+    console.log(activityDataLocal);
+
     if (useServerData) {
       console.log("Utilisation API");
       return dataJSON.data.sessions.map((session) => ({
@@ -52,7 +61,7 @@ class DataFormatterActivity {
       }));
     } else {
       console.log("Utilisation LOCAL");
-      const data = USER_ACTIVITY[0];
+      const data = activityDataLocal || {};
       console.log(data);
       return data.sessions.map((session) => ({
         kilogram: session.kilogram,
@@ -71,7 +80,10 @@ class DataFormatterActivity {
 }
 
 class DataFormatterScore {
-  static formatScore(userData) {
+  static formatScore(userData, dataIndex = userDataIndex) {
+    const scoreDataLocal = USER_MAIN_DATA[dataIndex];
+    console.log(scoreDataLocal);
+
     if (useServerData) {
       console.log("Utilisation API");
       const todayScore = userData.data.todayScore || userData.data.score;
@@ -88,7 +100,7 @@ class DataFormatterScore {
       ];
     } else {
       console.log("Utilisation LOCAL");
-      const data = USER_MAIN_DATA[0];
+      const data = scoreDataLocal || {};
       console.log(data);
       const score = data.todayScore;
       console.log(score);
@@ -126,7 +138,7 @@ class DataFormatterSessions {
     return day;
   }
 
-  static formatSessions(dataJSON) {
+  static formatSessions(dataJSON, dataIndex = userDataIndex) {
     if (useServerData) {
       console.log("Utilisation API");
       return dataJSON.data.sessions.map((session) => ({
@@ -135,7 +147,7 @@ class DataFormatterSessions {
       }));
     } else {
       console.log("Utilisation LOCAL");
-      const UserSessions = USER_AVERAGE_SESSIONS[0];
+      const UserSessions = USER_AVERAGE_SESSIONS[dataIndex];
       console.log(UserSessions);
       return UserSessions.sessions.map((session) => ({
         day: DataFormatterSessions.formatDayLabel(session.day),
@@ -146,14 +158,14 @@ class DataFormatterSessions {
 }
 
 class DataFormatterName {
-  static formatUserData(userData) {
+  static formatUserData(userData, dataIndex = userDataIndex) {
     if (useServerData) {
       console.log("Utilisation API");
       const { firstName } = userData.data.userInfos;
       return firstName;
     } else {
       console.log("Utilisation LOCAL");
-      const Name = USER_MAIN_DATA[0];
+      const Name = USER_MAIN_DATA[dataIndex];
       console.log(Name);
       const firstName = Name.userInfos.firstName;
       console.log(firstName);
@@ -163,7 +175,7 @@ class DataFormatterName {
 }
 
 class DataFormatterNutrition {
-  static formatNutritionData(userData) {
+  static formatNutritionData(userData, dataIndex = userDataIndex) {
     if (useServerData) {
       console.log("Utilisation API");
       const { calorieCount, proteinCount, carbohydrateCount, lipidCount } =
@@ -177,7 +189,7 @@ class DataFormatterNutrition {
       };
     } else {
       console.log("Utilisation LOCAL");
-      const data = USER_MAIN_DATA[0];
+      const data = USER_MAIN_DATA[dataIndex];
       console.log(data);
       const Nutrition = data.keyData;
       console.log(Nutrition);
@@ -200,4 +212,5 @@ export {
   DataFormatterName,
   DataFormatterNutrition,
   setUseServerData,
+  setDataIndex,
 };
