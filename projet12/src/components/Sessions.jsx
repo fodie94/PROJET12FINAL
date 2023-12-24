@@ -10,14 +10,13 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-
+import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 import { SessionsService } from "../fichierService/ficheService"; // Import du nouveau fichier
-import { useUser } from "../userID/userID";
 
 function Sessions() {
-  const { userId } = useUser();
   const userSessions = SessionsService(userId);
   //  console.log(userSessions);
+
   return (
     <ResponsiveContainer
       id="performance-container"

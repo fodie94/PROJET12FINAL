@@ -4,12 +4,8 @@ import { PieChart, Pie, Cell } from "recharts";
 // import "../styles/Home.css";
 import "../styles/Score.css";
 import { useScoreData } from "../fichierService/ficheService"; // Assurez-vous de fournir le bon chemin
-import { useUser } from "../userID/userID";
-
+import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 function Score() {
-  const { userId } = useUser();
-  const scoreData = useScoreData(userId);
-
   // const COLORS = ["#FF0000", "green"];
 
   // return (
@@ -59,7 +55,7 @@ function Score() {
   //     </text> */}
   //   </PieChart>
   // );
-
+  const scoreData = useScoreData(userId);
   return (
     <PieChart width={170} height={170}>
       <Pie

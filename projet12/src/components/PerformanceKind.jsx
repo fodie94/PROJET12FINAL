@@ -11,13 +11,10 @@ import {
 // import "../styles/Home.css";
 import "../styles/PerformanceKind.css";
 import { PerformanceKindService } from "../fichierService/ficheService"; // Assurez-vous de fournir le bon chemin
-import { useUser } from "../userID/userID";
+import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 
 function PerformanceKind() {
-  const { userId } = useUser();
-  const performanceData = PerformanceKindService(userId);
-
-  const data = performanceData || [];
+  const performanceData = PerformanceKindService(userId) || [];
 
   return (
     <>
@@ -26,7 +23,7 @@ function PerformanceKind() {
           cx="50%"
           cy="50%"
           outerRadius="80%"
-          data={data}
+          data={performanceData}
           margin={{ left: 30, top: 30, right: 30, bottom: 30 }}
           radius={[5, 5, 5, 5]}
           startAngle={30}

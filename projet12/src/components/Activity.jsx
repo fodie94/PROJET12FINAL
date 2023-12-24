@@ -13,13 +13,11 @@ import {
 import "../styles/Activity.css";
 import { useUserActivity } from "../fichierService/ficheService";
 import { DataFormatterActivity } from "../formatage/formatageData";
-import { useUser } from "../userID/userID";
+import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 
 function Activity() {
-  const { userId } = useUser();
   const userActivity = useUserActivity(userId);
   const data = DataFormatterActivity.formatChartData(userActivity);
-
   console.log(data);
 
   return (

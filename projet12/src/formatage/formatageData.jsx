@@ -3,10 +3,11 @@ import USER_ACTIVITY from "../data/USER_ACTIVITY.json";
 import USER_AVERAGE_SESSIONS from "../data/USER_AVERAGE_SESSIONS.json";
 import USER_MAIN_DATA from "../data/USER_MAIN_DATA.json";
 import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
-
+import userId from "../userID/userID"; // Ajustez le chemin en conséquence
 // Définissez une variable globale pour déterminer l'utilisation des données du serveur ou locales
-let useServerData = false; // Mettez la valeur par défaut ici
-let userDataIndex = 0; // Index par défaut userID 12 = 0 / userID 18 = 1
+let useServerData = true; // Mettez la valeur par défaut ici
+let userDataIndex = userId === 12 ? 0 : userId === 18 ? 1 : 0; // Choisissez l'index en fonction de userId
+console.log(userDataIndex);
 
 // Exportez une fonction pour mettre à jour la variable useServerData
 function setUseServerData(value) {
