@@ -4,9 +4,16 @@ import USER_AVERAGE_SESSIONS from "../data/USER_AVERAGE_SESSIONS.json";
 import USER_MAIN_DATA from "../data/USER_MAIN_DATA.json";
 import USER_PERFORMANCE from "../data/USER_PERFORMANCE.json";
 
+// Définissez une variable globale pour déterminer l'utilisation des données du serveur ou locales
+let useServerData = false; // Mettez la valeur par défaut ici
+
+// Exportez une fonction pour mettre à jour la variable useServerData
+function setUseServerData(value) {
+  useServerData = value;
+}
+
 class DataFormatterKind {
-  static formatPerformanceData(JSON, useServerData = true) {
-    // Vérifier si JSON est défini et a les propriétés attendues
+  static formatPerformanceData(JSON) {
     const performanceDataLocal = USER_PERFORMANCE[0].data;
     const performanceNamesLocal = USER_PERFORMANCE[0].kind;
     console.log(performanceDataLocal);
@@ -35,47 +42,8 @@ class DataFormatterKind {
   }
 }
 
-// class DataFormatterActivity {
-//   static formatActivity(dataJSON, useServerData) {
-//     // Vérifier si dataJSON est un objet avec une propriété 'data' et un tableau de sessions valide
-//     if (
-//       !dataJSON || // Vérifie si dataJSON est falsifié
-//       (useServerData && !dataJSON.data) || // Vérifie si on utilise les données du serveur et que la propriété 'data' est manquante
-//       (useServerData && !Array.isArray(dataJSON.data.sessions)) // Vérifie si on utilise les données du serveur et que 'sessions' n'est pas un tableau
-//     ) {
-//       console.error("Données invalides :", dataJSON);
-//       return [];
-//     }
-
-//     if (useServerData) {
-//       // Si on utilise les données du serveur, mapper le tableau de sessions
-//       return dataJSON.data.sessions.map((session) => ({
-//         kilogram: session.kilogram,
-//         calories: session.calories,
-//       }));
-//     } else {
-//       // Si on utilise des données locales, extraire sessionsArray et le mapper
-//       const sessionsArray = dataJSON.length === 1 ? dataJSON[0].sessions : [];
-//       return sessionsArray.map((session) => ({
-//         kilogram: session.kilogram,
-//         calories: session.calories,
-//       }));
-//     }
-//   }
-
-//   static formatChartData(sessions) {
-//     // Mapper les sessions pour obtenir un format adapté aux données du graphique
-//     return sessions.map((session, index) => ({
-//       name: index + 1,
-//       kilogram: session.kilogram,
-//       calories: session.calories,
-//     }));
-//   }
-// }
-
 class DataFormatterActivity {
-  static formatActivity(dataJSON, useServerData = true) {
-    // Si on utilise les données du serveur
+  static formatActivity(dataJSON) {
     if (useServerData) {
       console.log("Utilisation API");
       return dataJSON.data.sessions.map((session) => ({
@@ -84,7 +52,6 @@ class DataFormatterActivity {
       }));
     } else {
       console.log("Utilisation LOCAL");
-      // Utilisation des données locales
       const data = USER_ACTIVITY[0];
       console.log(data);
       return data.sessions.map((session) => ({
@@ -95,7 +62,6 @@ class DataFormatterActivity {
   }
 
   static formatChartData(sessions) {
-    // Mapper les sessions pour obtenir un format adapté aux données du graphique
     return sessions.map((session, index) => ({
       name: index + 1,
       kilogram: session.kilogram,
@@ -105,8 +71,7 @@ class DataFormatterActivity {
 }
 
 class DataFormatterScore {
-  static formatScore(userData, useServerData) {
-    // Si on utilise les données du serveur
+  static formatScore(userData) {
     if (useServerData) {
       console.log("Utilisation API");
       const todayScore = userData.data.todayScore || userData.data.score;
@@ -123,7 +88,6 @@ class DataFormatterScore {
       ];
     } else {
       console.log("Utilisation LOCAL");
-      // Utilisation des données locales
       const data = USER_MAIN_DATA[0];
       console.log(data);
       const score = data.todayScore;
@@ -145,7 +109,6 @@ class DataFormatterScore {
 
 class DataFormatterSessions {
   static formatDayLabel(day) {
-    // Si day est un nombre, mappez-le à la correspondance appropriée
     const numericDayMapping = {
       1: "L",
       2: "M",
@@ -163,8 +126,7 @@ class DataFormatterSessions {
     return day;
   }
 
-  static formatSessions(dataJSON, useServerData = true) {
-    // Si on utilise les données du serveur
+  static formatSessions(dataJSON) {
     if (useServerData) {
       console.log("Utilisation API");
       return dataJSON.data.sessions.map((session) => ({
@@ -173,7 +135,6 @@ class DataFormatterSessions {
       }));
     } else {
       console.log("Utilisation LOCAL");
-      // Utilisation des données locales
       const UserSessions = USER_AVERAGE_SESSIONS[0];
       console.log(UserSessions);
       return UserSessions.sessions.map((session) => ({
@@ -184,17 +145,14 @@ class DataFormatterSessions {
   }
 }
 
-// DataFormatterName.jsx
 class DataFormatterName {
-  static formatUserData(userData, useServerData = true) {
-    // Si on utilise les données du serveur
+  static formatUserData(userData) {
     if (useServerData) {
       console.log("Utilisation API");
       const { firstName } = userData.data.userInfos;
       return firstName;
     } else {
       console.log("Utilisation LOCAL");
-      // Utilisation des données locales
       const Name = USER_MAIN_DATA[0];
       console.log(Name);
       const firstName = Name.userInfos.firstName;
@@ -204,10 +162,8 @@ class DataFormatterName {
   }
 }
 
-// DataFormatterNutrition.jsx
 class DataFormatterNutrition {
-  static formatNutritionData(userData, useServerData = false) {
-    // Si on utilise les données du serveur
+  static formatNutritionData(userData) {
     if (useServerData) {
       console.log("Utilisation API");
       const { calorieCount, proteinCount, carbohydrateCount, lipidCount } =
@@ -221,7 +177,6 @@ class DataFormatterNutrition {
       };
     } else {
       console.log("Utilisation LOCAL");
-      // Utilisation des données locales
       const data = USER_MAIN_DATA[0];
       console.log(data);
       const Nutrition = data.keyData;
@@ -244,4 +199,5 @@ export {
   DataFormatterSessions,
   DataFormatterName,
   DataFormatterNutrition,
+  setUseServerData,
 };
