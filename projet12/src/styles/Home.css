@@ -84,7 +84,7 @@ p {
 }
 
 .AnalyseLeft {
-  width: 835px;
+  width: 75%;
   height: 100%;
   gap: 28px;
   /* border: 1px solid black; */
@@ -118,6 +118,7 @@ p {
   display: flex;
   flex-direction: column;
   /* border: 1px solid black; */
-  flex: 1;
+  /* flex: 1; */
+  width: 22.4%;
   justify-content: space-between;
 }
