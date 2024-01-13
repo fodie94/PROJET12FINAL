@@ -90,7 +90,7 @@ class DataFormatterScore {
     if (useServerData) {
       console.log("Utilisation API");
       const todayScore = userData.data.todayScore || userData.data.score;
-
+      console.log(todayScore);
       return [
         {
           name: "score",
@@ -105,20 +105,14 @@ class DataFormatterScore {
       console.log("Utilisation LOCAL");
       const data = scoreDataLocal || {};
       console.log(data);
-      let score;
 
-      // Ajoutez la condition ici
-      if (userId === 12) {
-        score = data.todayScore;
-      } else if (userId === 18) {
-        score = data.score;
-      }
+      const todayScore = data.todayScore || data.score;
+      console.log(todayScore);
 
-      console.log(score);
       return [
         {
           name: "score",
-          value: score || 0,
+          value: todayScore || 0,
         },
         {
           name: "restant",

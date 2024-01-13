@@ -1,3 +1,3 @@
 // userID.jsx
-const userId = 12; // or const userId = 18;
+const userId = 18; // or const userId = 18;
 export default userId;
